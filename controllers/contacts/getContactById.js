@@ -1,11 +1,11 @@
-const contactsOperations = require("../../models/contacts");
+const {Contact} = require("../../models");
 const {NotFound} = require("http-errors");
 
 const getContactById = async (req, res) => {
-      const {contactId} = req.params;
-      const result = await contactsOperations.getContactById(contactId);
+      const {id} = req.params;
+      const result = await Contact.findById(id);      
       if(!result) {
-       throw new NotFound(`Product with id=${contactId} not found`);
+       throw new NotFound(`Product with id=${id} not found`);
       }
       res.json({
         status: "success",
